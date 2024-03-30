@@ -1,0 +1,71 @@
+
+
+<div class="container card "*ngIf="viewStatus">
+    <div class="row">
+      <div class="col-md-6">
+        <img src="{{showBigImage}}" alt="image"class="image-responsive card-img-top">
+      </div>
+      <div class="col-md-6">
+        <div class="d-flex scroll pb-3">
+          <div class="position-relative mt-4"*ngFor="let image of product?.images">
+            <input type="checkbox"value="{{image.public_id}}"name="check" id="check">
+            <img
+              src="{{ image.url }}"
+              alt="image"
+              width="100px"
+              height="130px"
+              (click)="onShowBigImage(image)"
+              class="mx-2 p-1"
+              [ngStyle]="{'border': showBigImage==image.url ? '1px solid black':'none'}"
+            />
+          </div>
+        </div>
+        <hr />
+        <div class="card-body">
+          <a class="card-link text-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Select image</a>
+          <a class="card-link text-primary"(click)="onAddAndDeleteImages()">Delete_or_add_image</a>
+          <h5 class="card-title">{{ product?.name }}</h5>
+          <h5 class="card-title">
+            Price: {{ product?.price |currencyFormatting:'&#8377;' }}
+          </h5>
+          <div class="e2e-inner-html-bound"[innerHtml]="product?.description | html"></div>
+        </div>
+      </div>
+    </div>
+</div>
+  <!-- modal add image-->
+  <div class="container">
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <form>
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          </div>
+          <div class="modal-body">
+              <div class="form-group mb-4">
+                  <label for="file">Select Image</label>
+                  <input type="file"#file multiple name="images"class="form-control"(change)="onFile($event)">
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="button"data-bs-dismiss="modal"(click)="onResetInputField()" class="btn btn-primary">Select</button>
+          </div>
+        </form>
+        </div>
+      </div>
+    </div>
+  </div>

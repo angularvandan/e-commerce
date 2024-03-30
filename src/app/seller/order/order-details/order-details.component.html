@@ -1,0 +1,146 @@
+<div class="container mt-4">
+    <div class="row my-2">
+      <h4 class="text-center my-2">Order Details</h4>
+        <div class="col-lg-7">
+          <div class="scrollbar">
+            <table class="table table-secondary table-striped table-hover mt-4 ">
+              <thead class="table-secondary">
+                <tr class="align-top">
+                  <th scope="col">#</th>
+                  <th scope="col">Product Image:</th>
+                  <th scope="col">Product Name:</th>
+                  <th scope="col">Price:</th>
+                  <th scope="col">Quantity:</th>
+                  <th scope="col">Discount:</th>
+                  <th scope="col">Total Price:</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  class="align-middle"
+                  *ngFor="let product of products;let i=index"
+                >
+                  <td class="align-middle"scope="col">{{ i + 1 }}</td>
+                  <td>
+                    <img [src]="productImage[i]" alt="image"width="150px"height="200px">
+                  </td>
+                  <td class="align-middle">{{ product?.name }}</td>
+                  <td class="align-middle">{{ product?.price | currencyFormatting:'&#8377;'}}</td>
+                  <td class="align-middle">{{ product?.qty }}</td>
+                  <td class="align-middle">{{ product?.price-product?.subTotal | currencyFormatting:'&#8377;'}}</td>
+                  <td class="align-middle">{{ product?.subTotal | currencyFormatting:'&#8377;'}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      <div class="col-lg-5 ms-auto">
+        <h4 class="text-center">Price Details</h4>
+        <div class="row shadow">
+          <div class="col-6 text-center">
+            <p>Price({{ totalProducts }} items)</p>
+            <p>Discount</p>
+            <p>Delivery Fee</p>
+            <p class="fw-bold">Total Amounts:</p>
+          </div>
+          <div class="col-6 text-center">
+            <p>{{ totalPrice | currencyFormatting:'&#8377;' }}</p>
+            <p>{{ totalDiscount | currencyFormatting:'&#8377;'}}</p>
+            <p>{{ deliveryFee | currencyFormatting:'&#8377;' }}</p>
+            <p class="fw-bold">{{ totalPrice-totalDiscount+deliveryFee | currencyFormatting:'&#8377;' }}</p>
+          </div>
+          <div class="row text-center">
+            <div class="col">
+              <button class="btn btn-primary my-2 me-2"[disabled]="cancelStatus"(click)="onCancel()">
+                Cancel
+              </button>
+              <button class="btn btn-primary my-2 me-2"[disabled]="dispatchStatus"(click)="onDispatch()" >
+                Dispatch
+              </button>
+              <button class="btn btn-primary my-2"[disabled]="deliverStatus" (click)="onDelivered()">
+                Delivered
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div
+                  class="p-4 mb-3 position-relative"
+                >
+                  <h4 class="text-center mb-5">Address Details</h4>
+                  <div class="row">
+                    <div class="col-xl-6">
+                      <div class="form-group">
+                        <label for="street" class="p-0 mb-1">Enter Street1:</label>
+                        <input
+                          class="form-control mb-3"
+                          type="text"
+                          id="street"
+                          value="{{ orderAddress?.street }}"
+                          placeholder="Enter Street"
+                          disabled
+                        />
+                      </div>
+                    </div>
+                    <div class="col-xl-6">
+                      <div class="form-group">
+                        <label for="street1" class="p-0 mb-1">Enter Street2:</label>
+                        <input
+                          class="form-control mb-3"
+                          type="text"
+                          id="street1"
+                          value="{{ orderAddress?.addressLine2 }}"
+                          placeholder="Enter Street"
+                          disabled
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xl-4">
+                      <div class="form-group">
+                        <label for="city" class="p-0 mb-1">Enter City:</label>
+                        <input
+                          class="form-control mb-3"
+                          type="text"
+                          id="city"
+                          value="{{ orderAddress?.city }}"
+                          placeholder="Enter city"
+                          disabled
+                        />
+                      </div>
+                    </div>
+                    <div class="col-xl-4">
+                      <div class="form-group">
+                        <label for="state" class="p-0 mb-1">Enter State:</label>
+                        <input
+                          class="form-control mb-3"
+                          type="text"
+                          id="state"
+                          value="{{ orderAddress?.state }}"
+                          placeholder="Enter state"
+                          disabled
+                        />
+                      </div>
+                    </div>
+                    <div class="col-xl-4">
+                      <div class="form-group">
+                        <label for="pin" class="p-0 mb-1">Enter Pin:</label>
+                        <input
+                          class="form-control mb-3"
+                          type="text"
+                          id="pin"
+                          value="{{ orderAddress?.pin }}"
+                          placeholder="Enter Pin"
+                          disabled
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+      </div>
+    </div>
+  </div>  

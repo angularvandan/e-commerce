@@ -1,0 +1,117 @@
+<div class="container mt-5 mx-auto">
+  <div class="row">
+    <div class="col-md-5">
+      <div
+        class="card p-4 mb-3 position-relative"
+        *ngFor="let address of allAddress; let i = index"
+      >
+        <div class="position-absolute check">
+          <input
+            type="radio"
+            class="custom-radio"
+            name="radio"
+            (click)="onRadioAddress(address?._id)"
+          />
+        </div>
+        <h4 class="text-center mb-5">Address Details</h4>
+        <div class="row">
+          <label
+            ><h5>Address: {{ i + 1 }}</h5></label
+          >
+          <div class="col-xl-6">
+            <div class="form-group">
+              <label for="street" class="p-0 mb-1">Enter Street1:</label>
+              <input
+                class="form-control mb-3"
+                type="text"
+                id="street"
+                value="{{ address?.street }}"
+                placeholder="Enter Street"
+                disabled
+              />
+            </div>
+          </div>
+          <div class="col-xl-6">
+            <div class="form-group">
+              <label for="street1" class="p-0 mb-1">Enter Street2:</label>
+              <input
+                class="form-control mb-3"
+                type="text"
+                id="street1"
+                value="{{ address?.addressLine2 }}"
+                placeholder="Enter Street"
+                disabled
+              />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xl-4">
+            <div class="form-group">
+              <label for="city" class="p-0 mb-1">Enter City:</label>
+              <input
+                class="form-control mb-3"
+                type="text"
+                id="city"
+                value="{{ address?.city }}"
+                placeholder="Enter city"
+                disabled
+              />
+            </div>
+          </div>
+          <div class="col-xl-4">
+            <div class="form-group">
+              <label for="state" class="p-0 mb-1">Enter State:</label>
+              <input
+                class="form-control mb-3"
+                type="text"
+                id="state"
+                value="{{ address?.state }}"
+                placeholder="Enter state"
+                disabled
+              />
+            </div>
+          </div>
+          <div class="col-xl-4">
+            <div class="form-group">
+              <label for="pin" class="p-0 mb-1">Enter Pin:</label>
+              <input
+                class="form-control mb-3"
+                type="text"
+                id="pin"
+                value="{{ address?.pin }}"
+                placeholder="Enter Pin"
+                disabled
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 offset-3 mx-auto">
+      <h4 class="text-center">Price Details</h4>
+      <div class="row">
+        <div class="col-6 text-center">
+          <p>Price({{ totalProducts }} items)</p>
+          <p>Discount</p>
+          <p class="fw-bold">Total Amounts:</p>
+        </div>
+        <div class="col-6 text-center">
+          <p>{{ totalPrice+totalDiscount | currencyFormatting:'&#8377;' }}</p>
+          <p>{{ totalDiscount | currencyFormatting:'&#8377;'  }}</p>
+          <p class="fw-bold">{{ totalPrice | currencyFormatting:'&#8377;'  }}</p>
+          <div class="form-group">
+            <button
+              class="btn btn-primary"
+              type="button"
+              (click)="onCreateOrder()"
+              [disabled]="!addressChecked"
+            >
+              Create Order
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

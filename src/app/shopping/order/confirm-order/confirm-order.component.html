@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="row mt-5">
+        <h4 class="text-center">Confirm Order</h4>
+        <div class="col-5 mx-auto p-5 shadow1">
+            <form [formGroup]="cardForm"(ngSubmit)="onConfirmOrder()">
+            <div class="row">
+                <div class="col form-group">
+                    <div class="row mb-3">    
+                        <label for="name">Enter Holder Name:</label>           
+                        <input type="text"class="form-control ms-3"formControlName="nameOnCard">
+                    </div>
+                    <div class="row mb-3">
+                        <label for="name">Enter Card Number:</label>                          
+                        <input type="text"class="form-control ms-3"formControlName="cardNumber">
+                    </div>
+                    <div class="row mb-3">  
+                        <label for="name">Enter Expiry Date:</label>                        
+                        <input type="text"class="form-control ms-3"placeholder="mm/yyyy"maxLength="7"formControlName="expiry">
+                    </div>
+                    <div class="row mb-3">  
+                        <label for="name">Enter Cvv:</label>                       
+                        <input type="text"maxLength="3"class="form-control ms-3"formControlName="cvv">
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary"[disabled]="!cardForm.valid">Confirm</button>
+            </form>
+        </div>
+    </div>
+</div>

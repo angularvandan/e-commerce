@@ -1,0 +1,77 @@
+<div
+  class="spinner-border text-warning loading"
+  role="status"
+  *ngIf="!dataComingStatus"
+>
+  <span class="visually-hidden">Loading...</span>
+</div>
+<div class="container mt-5" *ngIf="dataComingStatus">
+  <div class="row mt-2">
+    <div class="card mx-auto shadow">
+      <div class="col">
+        <div class="col card-img-top d-flex justify-content-center">
+          <img src="../../../assets/user.png" width="200px" alt="logo" />
+        </div>
+        <div class="mt-5 card-body">
+          <div class="row">
+            <div class="col-md-6 form-group">
+              <label for="name"><b>Full Name:</b></label>
+              <input
+                class="form-control my-3"
+                type="text"
+                value="{{ specificUserByUrl?.name }}"
+                disabled
+              />
+              <label for="name"
+                ><b>Email:</b>
+                <a
+                  *ngIf="!specificUserByUrl?.isEmailVerified"
+                  class="text-danger ms-3 mouse"
+                  (click)="onVerifyEmail()"
+                  >Verify email</a
+                >
+                <img
+                  *ngIf="specificUserByUrl?.isEmailVerified"
+                  src="../../../assets/verijy.png"
+                  alt="verified"
+                  style="width: 25px"
+                />
+              </label>
+              <input
+                class="form-control"
+                type="email"
+                value="{{ specificUserByUrl?.email }}"
+                disabled
+              />
+            </div>
+            <div class="col-md-6 form-group">
+              <label for="name"><b>Company Name:</b></label>
+              <input
+                class="form-control my-3"
+                type="text"
+                value="{{ specificUserByUrl?._org.name }}"
+                disabled
+              />
+              <label for="name"><b>Role:</b></label>
+              <input
+                class="form-control"
+                type="text"
+                value="{{ specificUserByUrl?.role }}"
+                disabled
+              />
+            </div>
+          </div>
+          <div class="form-group mt-3">
+            <button
+              type="button"
+              class="btn btn-secondary form-control"
+              routerLink="../company"
+              >
+              EditCompanyName
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

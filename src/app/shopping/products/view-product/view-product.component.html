@@ -1,0 +1,40 @@
+<div class="container">
+    <div class="row my-2">
+      <div class="col-8">
+        <div class="row mb-3">
+          <div class="col-6">
+            <img src="{{showBigImage}}" width="300px"alt="image"class="image-responsive card-img-top">
+          </div>
+          <div class="col-6">
+            <div class="d-flex scroll pb-3">
+              <div class="position-relative mt-4"*ngFor="let image of product?.images">
+                <img
+                  src="{{image?.url}}"
+                  alt="image"
+                  width="100px"
+                  height="130px"
+                  class="mx-2 p-1"
+                  (click)="onSmallImageClick(image)"
+                  [ngStyle]="{'border': showBigImage==image?.url ? '2px solid black':'none' }"
+                />
+              </div>
+            </div>
+            <hr />
+            <div>
+              <h5 >{{product?.name}}</h5>
+              <h5>
+                Price:{{product?.price |currencyFormatting:'&#8377;'}}
+              </h5>
+              <div class="desc-scroll"[innerHtml]="product?.description | html "></div>
+            </div>
+          </div>
+          <hr>
+          <div class="row mb-3">
+            <div class="col">
+              <button class="btn btn-primary">Place Order</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

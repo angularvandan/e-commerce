@@ -1,0 +1,205 @@
+<div
+  class="spinner-border text-warning loading"
+  role="status"
+  *ngIf="!dataComingStatus"
+>
+  <span class="visually-hidden">Loading...</span>
+</div>
+<div *ngIf="dataComingStatus">
+  <div class="container mt-3" *ngIf="containerStatus">
+    <div class="row mt-4">
+      <div class="card mx-auto">
+        <div class="col mt-3 py-3">
+          <h2 class="card-title text-center" *ngIf="editUserStatus">
+            Update User
+          </h2>
+          <h2 class="card-title text-center" *ngIf="editRoleStatus">
+            Update Role
+          </h2>
+          <div class="card-body">
+            <form [formGroup]="reactiveForm" (ngSubmit)="onUpdateUser()">
+              <div class="form-group mb-4">
+                <label for="name">Enter name:</label>
+                <input
+                  type="name"
+                  formControlName="name"
+                  class="form-control"
+                />
+              </div>
+              <div class="form-group mb-4">
+                <label for="email">Enter email:</label>
+                <input
+                  type="email"
+                  formControlName="email"
+                  class="form-control"
+                />
+              </div>
+              <div class="form-group mb-4" *ngIf="editUserStatus">
+                <label for="password">Enter password</label>
+                <input
+                  type="password"
+                  formControlName="password"
+                  class="form-control"
+                />
+              </div>
+              <div class="form-group mb-4">
+                <select formControlName="role" class="form-select">
+                  <option value="user">User</option>
+                  <option value="admin">Admin</option>
+                </select>
+              </div>
+              <div class="form-group mt-3">
+                <button class="btn btn-primary form-control">Update</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container" *ngIf="!containerStatus">
+    <div class="container">
+      <div class="row">
+        <div class="col my-5 text-center"><h4>User Details</h4></div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <div class="form-group">
+            <label class="form-label">Limit</label>
+            <select
+              [(ngModel)]="limit"
+              (change)="onChangeRecord()"
+              class="form-select"
+            >
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="6">6</option>
+              <option value="10">10</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label class="form-label">Sort</label>
+            <select
+              [(ngModel)]="sortBy"
+              class="form-select"
+              (change)="onChangeSortBy()"
+            >
+              <option value="">--Sort--</option>
+              <option value="role">Role</option>
+              <option value="name">Name</option>
+              <option value="email">Email</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="form-label">Search Name</label>
+            <div class="d-flex">
+              <input
+                class="form-control"
+                [(ngModel)]="name"
+                type="text"
+                placeholder="Enter Name"
+              />
+              <button
+                type="button"
+                (click)="onChangeName()"
+                class="btn btn-primary form-control mx-2"
+              >
+                Find
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary"
+                routerLink="../create-user"
+              >
+                Create User
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="scrollbar">
+            <table class="table table-secondary table-striped table-hover mt-4">
+              <thead class="table-secondary">
+                <tr class="align-top">
+                  <th scope="col">#</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Role</th>
+                  <th scope="col">Edit User</th>
+                  <th scope="col">Edit Role</th>
+                  <th scope="col">Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  class="align-middle"
+                  *ngFor="
+                    let user of userDetails
+                      | paginate
+                        : {
+                            id: 'first',
+                            itemsPerPage: limit,
+                            currentPage: pageCount,
+                            totalItems: totalResult
+                          };
+                    let i = index
+                  "
+                >
+                  <td scope="col">{{ i + 1 }}</td>
+                  <td>{{ user["name"] }}</td>
+                  <td>{{ user["email"] }}</td>
+                  <td>{{ user["role"] }}</td>
+                  <td>
+                    <button
+                      (click)="editUser(user)"
+                      class="btn btn-secondary"
+                      type="button"
+                    >
+                      Edit User
+                    </button>
+                  </td>
+                  <td>
+                    <button
+                      (click)="editRole(user)"
+                      class="btn btn-secondary"
+                      type="button"
+                    >
+                      Edit Role
+                    </button>
+                  </td>
+                  <td>
+                    <button
+                      class="btn btn-danger"
+                      type="button"
+                      (click)="onDeleteUser(user['_id'])"
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="row d-flex justify-content-end">
+        <div class="col mt-4">
+          <pagination-controls
+            id="first"
+            (pageChange)="onPageChange($event)"
+            [directionLinks]="true"
+            previousLabel="Previous"
+            nextLabel="Next"
+          >
+          </pagination-controls>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

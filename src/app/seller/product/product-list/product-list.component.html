@@ -1,0 +1,182 @@
+<!-- loading  -->
+<div
+class="spinner-border text-warning loading"
+role="status"
+*ngIf="!dataComingStatus"
+>
+<span class="visually-hidden">Loading...</span>
+</div>
+
+<!-- sort product  -->
+<div class="all-product" *ngIf="dataComingStatus">
+  <div class="container " *ngIf="createProductStatus">
+    <h4 class="text-center ">Product List</h4>
+    <div class="row mt-5">
+      <div class="col-md-3">
+        <div class="form-group">
+          <label class="form-label">Limit</label>
+          <select class="form-select" [(ngModel)]="limit" (change)="onLimit()">
+            <option value="4">4</option>
+            <option value="8">8</option>
+            <option value="12">12</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label class="form-label">Sort</label>
+          <select class="form-select" [(ngModel)]="sort" (change)="onSort()">
+            <option value="">--Sort--</option>
+            <option value="name">Name</option>
+            <option value="price">Price</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-8">
+            <div class="form-group">
+              <label class="form-label">Search Name</label>
+              <div class="d-flex">
+                <input
+                  class="form-control"
+                  type="text"
+                  placeholder="Enter Name"
+                  [(ngModel)]="name"
+                />
+                <button
+                type="button"
+                class="btn btn-primary mx-2"
+                (click)="onSortByName()"
+              >
+                Search
+              </button>
+              </div>
+            </div>
+          </div>
+            <div class="col-md-4 align-self-end mb-3">
+              <button
+                type="button"
+                class="btn btn-primary form-control"
+                style="white-space: break-spaces;"
+                routerLink="../create-products"
+              >
+                Add Product
+              </button>
+            </div>
+        </div>
+      </div>
+    </div>
+    <!-- all product list -->
+    <div class="row">
+      <div
+        class="col-lg-3 col-md-4 col-sm-6 my-3"
+        *ngFor="
+          let product of filterProducts
+            | paginate
+              : {
+                  id: 'first',
+                  itemsPerPage: limit,
+                  currentPage: page,
+                  totalItems: total_products
+                }
+        "
+      >
+        <div class="card shadow">
+          <img
+            src="{{ product.images[0]?.url }}"
+            class="card-img-top"
+            alt="image"
+          />
+          <hr />
+          <div class="card-body">
+            <a class="card-link text-primary" (click)="onViewProduct(product)"
+              >View Product</a
+            >
+            <h5 class="card-title">{{ product.name }}</h5>
+            <h5 class="card-title">
+              Price: {{ product.price | currencyFormatting:'&#8377;' }}
+            </h5>
+            <p class="card-text"[innerHtml]="product?.description |slice : 0 : 10"></p>
+            <a class="btn btn-secondary mb-2" (click)="onUpdate(product)"
+              >Update</a
+            >
+            <a
+              class="btn btn-danger float-end"
+              (click)="onDeleteProduct(product._id)"
+              >Delete</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- pagination  -->
+    <div class="row">
+      <div class="col mt-4 d-flex justify-content-end">
+        <pagination-controls
+          id="first"
+          (pageChange)="onPageChange($event)"
+          previousLabel="Previous"
+          nextLabel="Next"
+        >
+        </pagination-controls>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- update product  -->
+<div class="container py-3 mt-4" *ngIf="updateProductStatus">
+  <div class="row mt-1">
+    <div class="card mx-auto card1 shadow">
+      <div class="col mt-3 py-3">
+        <h2 class="card-title text-center">Update Product</h2>
+        <div class="card-body">
+          <form
+            [formGroup]="reactiveForm"
+            (ngSubmit)="onUpdateProduct(reactiveForm.value)"
+          >
+            <div class="form-group mb-4">
+              <label for="name">Enter name:</label>
+              <input type="name" formControlName="name" class="form-control" />
+            </div>
+            <!-- <div class="form-group mb-4">
+              <label for="text-area">Description:</label>
+              <textarea
+                class="form-control"
+                formControlName="description"
+                rows="3"
+              ></textarea>
+            </div> -->
+            <div class="form-group mb-4">
+              <label for="text-area">Description:</label>
+              <div class="NgxEditor__Wrapper">
+                  <ngx-editor-menu [editor]="editor"> </ngx-editor-menu>
+                  <ngx-editor [editor]="editor" formControlName="description" [disabled]="false" [placeholder]="'Type here...'"></ngx-editor>
+              </div>
+            </div>
+            <div class="form-group mb-4">
+              <label for="price">Price</label>
+              <input type="text" formControlName="price" class="form-control" />
+            </div>
+            <div class="form-group mt-3">
+              <button
+                class="btn btn-primary form-control mb-2"
+                [disabled]="!reactiveForm.valid"
+              >
+                Update
+              </button>
+              <button
+                class="btn btn-danger form-control mb-2"
+                type="button"
+                (click)="onCancelUpdate()"
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

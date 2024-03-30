@@ -1,0 +1,9 @@
+.card{
+    width: 500px;
+}
+input.ng-invalid.ng-touched{
+    border:2px solid red;
+}
+.message{
+    color:rgb(180, 49, 40);
+}

@@ -1,0 +1,20 @@
+.card{
+    width: fit-content;
+}
+.scroll{
+    overflow-x:scroll!important;
+}
+.desc-scroll{
+    overflow-y:auto;
+}
+a{
+    cursor: pointer;
+}
+.loading{
+    position:absolute;
+    border-width: 10px;
+    top:10%;
+    left: 50%;
+    width: 60px;
+    height: 60px;
+}

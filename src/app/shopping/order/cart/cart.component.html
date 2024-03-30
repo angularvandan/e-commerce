@@ -1,0 +1,76 @@
+<div
+  class="spinner-border text-warning loading"
+  role="status"
+  *ngIf="!checkAddressLogin"
+>
+  <span class="visually-hidden">Loading...</span>
+</div>
+
+<div class="container mt-4"  *ngIf="checkAddressLogin"
+>
+    <div class="row my-2">
+      <div class="col-lg-6">
+        <div class="row mb-3 shadow"*ngFor="let product of products;let i=index">
+          <div class="col-sm-6">
+            <img src="{{product.images[0]?.url}}"height="260px"width="200px"alt="image">
+          </div>
+          <div class="col-sm-6">
+            <div class="d-flex scroll pb-3">
+              <div class="position-relative mt-4"*ngFor="let image of product?.images">
+                <img
+                  src="{{image?.url}}"
+                  alt="image"
+                  width="100px"
+                  height="130px"
+                  class="mx-2 p-1"
+                  (click)="onSmallImageClick(image)"
+                  [ngStyle]="{'border': showBigImage==image?.url ? '2px solid black':'none' }"
+                />
+              </div>
+            </div>
+            <hr />
+            <div>
+              <h5 >{{product?.name}}</h5>
+              <div *ngIf="product?.deal"><b>(Discount)</b><b appDiscount >{{product?.deal?.discount}}</b>
+                <b class="card-title display">
+                  <del>Price: {{ product?.price | currencyFormatting:'&#8377;' }}</del>
+                  {{ product?.deal?.price | currencyFormatting:'&#8377;'}}
+                </b>
+                <b>Deals end in: <span appDiscount [abc]="product?.deal?.ends"></span></b>
+              </div>
+              <b class="card-title display mb-2"*ngIf="!product?.deal">
+                Price: {{ product?.price | currencyFormatting:'&#8377;' }}
+              </b>
+              <div class="desc-scroll"[innerHTML]="product?.description"></div>
+            </div>
+          </div>
+          <div class="col form-group d-flex mt-4">
+            <label for="item"><b>Item:</b></label>
+            <input class="form-control mx-3"#input [value]="product?.count" type="number"(change)="countItem(product?._id,input.value)">
+            <button class="btn btn-primary"(click)="onCancel(product?._id)">Cancel Item</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 ms-auto">
+        <h4 class="text-center">Price Details</h4>
+        <div class="row shadow">
+            <div class="col-6 text-center">
+                <p>Price({{totalProducts}} items)</p>
+                <p>Discount</p>
+                <p class="fw-bold">Total Amounts:</p>
+            </div>
+            <div class="col-6 text-center">
+                <p>{{totalPrice+totalDiscount | currencyFormatting:'&#8377;'}}</p>
+                <p>{{totalDiscount | currencyFormatting:'&#8377;'}}</p>
+                <p class="fw-bold">{{totalPrice | currencyFormatting:'&#8377;'}}</p>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="row my-5">
+      <div class="col">
+        <button class="btn btn-primary"(click)="onCheckout()">Checkout</button>
+      </div>
+    </div>
+</div>
+

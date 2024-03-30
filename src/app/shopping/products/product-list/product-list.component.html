@@ -1,0 +1,89 @@
+<div class="container">
+    <!-- all products list  -->
+    <div class="row mt-5">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label class="form-label">Limit</label>
+          <select class="form-select"[(ngModel)]="limit"(change)="onLimit()">
+            <option value="8">8</option>
+            <option value="16">16</option>
+            <option value="24">24</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label class="form-label">Sort</label>
+          <select class="form-select"[(ngModel)]="sortBy"(change)="onSortBy()">
+            <option value="">--Sort--</option>
+            <option value="name">Name</option>
+            <option value="price">Price</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label class="form-label">Search Name</label>
+              <div class="d-flex">
+                <input
+                  class="form-control"
+                  type="text"
+                  placeholder="Enter Name"
+                  [(ngModel)]="name"
+                />
+                <button type="button" class="btn btn-primary mx-2" (click)="onSortByName()">Search</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div
+        class="col-lg-3 col-md-4 col-sm-6 my-3"
+        *ngFor="let product of products | paginate: { id: 'first',
+                                      itemsPerPage: limit,
+                                      currentPage: page,
+                                      totalItems: totalProducts }"
+      >
+        <div class="card shadow">
+          <img
+            src="{{ product.images[0]?.url }}"
+            class="card-img-top"
+            alt="image"
+          />
+          <div class="card-body d-flex flex-column align-items-start">
+            <a class="card-link text-primary"(click)="onViewProduct(product?._id)">View Product</a>
+            <p class="card-title">{{ product?.name }}</p>
+            <div *ngIf="product?.deal"><b>(Discount)</b><b appDiscount >{{product?.deal?.discount}}</b>
+              <b class="card-title display">
+                <del>Price: {{ product?.price | currencyFormatting:'&#8377;' }}</del>
+                {{ product?.deal?.price | currencyFormatting:'&#8377;'}}
+              </b>
+              <b>Deals end in: <span appDiscount [abc]="product?.deal?.ends"></span></b>
+            </div>
+            <b class="card-title display mb-2"*ngIf="!product?.deal">
+              Price: {{ product?.price | currencyFormatting:'&#8377;' }}
+              
+            </b>
+            <p class="card-text"[innerHtml]="product?.description | slice : 0 : 20  "> </p>
+            
+          </div>
+          <a class="btn btn-primary float-start add-to-cart"(click)="onAddCart(product?._id)">Add to Cart</a>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col mt-4 d-flex justify-content-end">
+        <pagination-controls 
+        id="first" 
+        (pageChange)="pageChanged($event)"
+        previousLabel="Previous"
+         nextLabel="Next">
+        </pagination-controls>
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,35 @@
+.loading{
+    position:absolute;
+    border-width: 10px;
+    top:10%;
+    left: 50%;
+    width: 60px;
+    height: 60px;
+}
+.scrollbar{
+    overflow:auto;
+}
+button{
+    width: 120px;
+}
+td{
+    align-self: center;
+}
+.message{
+    color:rgb(28, 184, 122);
+}
+.card{
+    width: 500px;
+}
+#data-length{
+    width:100px;
+    height: 35px;
+}
+a:hover {
+    color: rgb(255, 0, 38);
+}
+pagination-controls{
+    display: flex;
+    justify-content: end;
+}
+

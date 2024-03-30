@@ -1,0 +1,88 @@
+
+<div class="container mt-5">
+  <div class="row mt-2">
+    <div class="card mx-auto shadow">
+      <div class="col">
+        <div class="card-img-top d-flex justify-content-center pt-2">
+          <div class="user-img rounded">
+            <img src="{{user?.picture}}" width="200px" alt="image"class="rounded" />
+            <div class="user-btn">
+              <a class="btn pe-0"data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-user-pen" style="color: #1f4fe0;"></i></a>
+              <a class="btn pe-0"(click)="onDeleteImage()"><i class="fa-solid fa-trash" style="color: #e91801;"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="mt-5 card-body">
+          <div class="row">
+            <form [formGroup]="reactiveForm"(ngSubmit)="onEditProfileSave()">
+            <div class="col form-group">
+              <label for="name"><b>Full Name:</b></label>
+              <input
+                class="form-control"
+                type="text"
+                id="name"
+                value="{{user?.name}}"
+                formControlName="name"
+              />
+            </div>
+            <div class="col form-group ">
+              <label for="email"
+                ><b>Email:</b>
+              </label>
+              <input
+                class="form-control"
+                type="email"
+                value="{{user?.email}}"
+                formControlName="email"
+              />
+            </div>
+            <div class="col form-group">
+              <button type="button"(click)="onEditProfile()"class="btn btn-primary me-2"[hidden]="!editProfileStatus">Edit Profile</button>
+              <button class="btn btn-primary me-2"[hidden]="editProfileStatus">Save</button>
+              <button type="button"class="btn btn-primary me-2"(click)="onCancel()"[hidden]="editProfileStatus">Cancel</button>
+              <button type="button"class="btn btn-primary me-2"(click)="onAddAddress()">Add Address</button>
+              <button type="button"class="btn btn-primary "(click)="onGetAddress()">Get Address</button>
+            </div>
+          </form>
+          </div>           
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- model  -->
+<div class="container">
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen	">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Update image</h5>
+      </div>
+      <div class="modal-body">
+        <input type="file" name="file" id="file"(change)="fileChangeEvent($event)">
+        <div class="row">
+          <div class="col-6">
+            <image-cropper
+            [imageChangedEvent]="imageChangedEvent"
+            [maintainAspectRatio]="true"
+            [aspectRatio]="4 / 3"
+            format="png"
+            (imageCropped)="imageCropped($event)"
+            (imageLoaded)="imageLoaded()"
+            (cropperReady)="cropperReady()"
+            (loadImageFailed)="loadImageFailed()"
+            ></image-cropper>
+          </div>
+          <div class="col-6">
+            <img [src]="croppedImage"width="350px"/>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button"(click)="onUpdateImage()" class="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

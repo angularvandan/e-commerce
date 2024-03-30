@@ -1,0 +1,40 @@
+<div class="container my-2">
+  <nav class="navbar navbar-default navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand fs-3">E-commerce</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ms-auto">
+      <li class="nav-item active me-3">
+        <a class="nav-link fs-5"routerLink="/setting/my-profile"routerLinkActive="active" [hidden]="navStatus" >My Profile</a>
+      </li>
+      <li class="nav-item active me-3">
+        <a class="nav-link fs-5"routerLink="/shop/products/product-list"routerLinkActive="active" >Buyer</a>
+      </li>
+      <li class="nav-item active me-3"[hidden]="navStatus">
+        <a class="nav-link fs-5"routerLink="/order/order-list"routerLinkActive="active" >Order</a>
+      </li>
+      <li class="nav-item active me-3"[hidden]="!navStatus">
+        <a class="nav-link fs-5"routerLink="/auth/login"routerLinkActive="active"[routerLinkActiveOptions]="{exact:true}" >Login</a>
+      </li>
+      <li class="nav-item active me-3"[hidden]="!navStatus">
+        <a class="nav-link fs-5"routerLink="/auth/register"routerLinkActive="active" >Register</a>
+      </li>
+      <li class="nav-item dropdown ms-3"[hidden]="navStatus">
+        <a class="nav-link dropdown-toggle btn  bg-primary"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Features
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item"routerLink="/setting/user-list"routerLinkActive="active" >User Details</a>
+          <a class="dropdown-item"routerLink="/product/product-list"routerLinkActive="active" >Product Details</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item"routerLink="/setting/change-password"routerLinkActive="active" >Change Password</a>
+          <a class="dropdown-item text-danger"(click)="onLogOut()">Logout</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+  </nav>
+</div>

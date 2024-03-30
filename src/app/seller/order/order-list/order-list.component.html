@@ -1,0 +1,75 @@
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label class="form-label">Limit</label>
+            <select class="form-select"[(ngModel)]="limit"(change)="onLimit()">
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="15">15</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label class="form-label">Sort</label>
+            <select class="form-select"[(ngModel)]="sortBy"(change)="onSortOption()">
+              <option value="">--Sort--</option>
+              <option value="status">Status</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    <div class="row">
+        <div class="col-12">
+        <div class="scrollbar">
+            <table class="table table-secondary table-striped table-hover mt-4">
+            <thead class="table-secondary">
+                <tr class="align-top">
+                <th scope="col">#</th>
+                <th scope="col">Transaction No:</th>
+                <th scope="col">Payment Status:</th>
+                <th scope="col">Order Status:</th>
+                <th scope="col">Date:</th>
+                <th scope="col">Details:</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr
+                class="align-middle"
+                *ngFor="let product of products | paginate: { id: 'first',
+                                      itemsPerPage: limit,
+                                      currentPage: page,
+                                      totalItems: totalProducts };let i=index"
+                >
+                <td scope="col">{{i+1}}</td>
+                <td>{{product?.transactionNo}}</td>
+                <td>{{product?.paymentStatus}}</td>
+                <td>{{product?.status}}</td>
+                <td>{{product?.createdAt | date:'fullDate'}}</td>
+                <td>
+                    <button
+                    class="btn btn-secondary"
+                    type="button"
+                    (click)="onShowProductDetails(product?._id)"
+                    >
+                    Show Details
+                    </button>
+                </td>
+                </tr>
+            </tbody>
+            </table>
+        </div>
+        </div>
+        <div class="row">
+            <div class="col mt-4 d-flex justify-content-end">
+              <pagination-controls 
+              id="first" 
+              (pageChange)="pageChanged($event)"
+              previousLabel="Previous"
+               nextLabel="Next">
+              </pagination-controls>
+            </div>
+          </div>
+    </div>
+</div>

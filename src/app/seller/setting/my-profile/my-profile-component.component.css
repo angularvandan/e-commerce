@@ -1,0 +1,20 @@
+input{
+    border: none;
+    margin-bottom: 20px;
+}
+.card{
+    width: 600px;
+}
+.loading{
+    position:absolute;
+    border-width: 10px;
+    top:10%;
+    left: 50%;
+    width: 60px;
+    height: 60px;
+}
+.mouse{
+    cursor:pointer
+}
+
+

@@ -1,0 +1,9 @@
+.scrollbar{
+    overflow:auto;
+}
+button{
+    width: 120px;
+}
+td{
+    align-self: center;
+}

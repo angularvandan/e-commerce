@@ -1,0 +1,86 @@
+<div class="container">
+  <div class="row mt-5">
+    <div class="card mx-auto shadow">
+      <div class="col p-4">
+        <h2 class=" card-title text-center mb-5">Register Application</h2>
+          <div class="card-body">
+          <form [formGroup]="reactiveForm"(ngSubmit)="onSubmit()">
+            <div class="form-group row">
+              <label for="name" class="p-0 mb-2">Enter Full Name:</label>
+              <input
+                class="form-control mb-3"
+                type="text"
+                formControlName="name"
+                id="name"
+                placeholder="Enter name"
+              />
+            </div>
+            <span *ngIf="!reactiveForm.get('name')?.valid && 
+                reactiveForm.get('name')?.touched">
+                Name is Required !
+            </span>
+            <div class="form-group row">
+                <label for="name" class="p-0 mb-2">Company Name:</label>
+                <input
+                  class="form-control mb-3"
+                  type="text"
+                  formControlName="cName"
+                  id="cName"
+                  placeholder="Enter Company name"
+                />
+            </div>
+            <span *ngIf="!reactiveForm.get('cName')?.valid &&
+                reactiveForm.get('cName')?.touched">
+                Company name is Required !
+            </span>
+              <div class="form-group row">
+                <label for="name" class="p-0 mb-2">Enter Role:</label>
+                <input
+                  class="form-control mb-3"
+                  type="text"
+                  formControlName="role"
+                  id="role"
+                  placeholder="Enter Role"
+                />
+              </div>
+              <span *ngIf="!reactiveForm.get('role')?.valid &&
+              reactiveForm.get('role')?.touched">
+              Role is Required !
+                </span>
+            <div class="form-group row">
+              <label for="email" class="p-0 mb-2">Enter Email:</label>
+              <input
+                class="form-control mb-3"
+                type="email"
+                formControlName="email"
+                id="email"
+                placeholder="Enter email"
+              />
+            </div>
+            <span *ngIf="!reactiveForm.get('email')?.valid && 
+              reactiveForm.get('email')?.touched">
+              Email is Required !
+            </span>
+            <div class="form-group row">
+              <label for="password" class="p-0 mb-2">Enter Password:</label>
+              <input
+                class="form-control mb-3"
+                type="password"
+                formControlName="password"
+                id="password"
+                placeholder="Enter password"
+              />
+            </div>
+            <span *ngIf="!reactiveForm.get('password')?.valid && 
+                reactiveForm.get('password')?.touched">
+                Password is Required !
+            </span>
+            <div class="form-group row my-3">
+              <button class="btn btn-primary"[disabled]="!reactiveForm.valid">Register</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

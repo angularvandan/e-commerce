@@ -1,0 +1,12 @@
+a{
+    cursor:pointer
+}
+input.ng-invalid.ng-touched{
+    border:2px solid red;
+}
+span,.errMessage{
+    color: red;
+}
+.card{
+    width:400px
+}

@@ -1,0 +1,46 @@
+<div class="container my-2">
+    <nav class="navbar navbar-default navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand fs-3">E-commerce</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent1" aria-controls="navbarSupportedContent1" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent1">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item me-3 ">
+          <a class="nav-link fs-5" routerLink="/shop/products/product-list" routerLinkActive="active"[routerLinkActiveOptions]="{exact:true}">All Products</a>
+        </li>
+        <li class="nav-item  me-3">
+          <a class="nav-link fs-5 "routerLink="/shop/order/cart" routerLinkActive="active" >Cart({{totalCart}})</a>
+        </li>
+        <li class="nav-item  me-3">
+          <a class="nav-link fs-5 "routerLink="/shop/order/order-history"routerLinkActive="active">Order</a>
+        </li>
+        <li class="nav-item me-3 ">
+          <a class="nav-link fs-5"routerLink="/auth/login"routerLinkActive="active">Seller</a>
+        </li>
+        <li class="nav-item  me-3"[hidden]="!loginRegisterStatus">
+          <a class="nav-link fs-5"routerLink="/shop/customer/profile"routerLinkActive="active">Profile</a>
+        </li>
+        <li class="nav-item  me-3"[hidden]="loginRegisterStatus">
+            <a class="nav-link fs-5"routerLink="/shop/auth/register"routerLinkActive="active">Register</a>
+          </li>
+          <li class="nav-item  me-3"[hidden]="loginRegisterStatus">
+            <a class="nav-link fs-5 "routerLink="/shop/auth/login" routerLinkActive="active">Login
+             <i class="fa-solid fa-right-to-bracket fa-beat" style="color: #27a404;"></i>
+            </a>
+          </li>
+        <li class="nav-item dropdown" [hidden]="!loginRegisterStatus">
+          <a class="dropdown-toggle btn btn-primary"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Features
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item text-danger" routerLink="/shop/customer/change-password"routerLinkActive="active">Change Password</a>
+            <a class="dropdown-item text-danger"(click)="onDeleteAccount()">Delete Account</a>
+            <hr>
+            <a class="dropdown-item text-danger" (click)="onLogOut()">Logout</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>

@@ -1,0 +1,78 @@
+<div class="container mt-5 mx-auto">
+    <div class="card mx-auto p-4">
+      <h4 class="text-center mb-5">Update Address</h4>
+      <form [formGroup]="reactiveForm"(ngSubmit)="onUpdateAddress()">
+        <div class="row">
+          <label><h5>Address:</h5></label>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="street" class="p-0 mb-1">Enter Street1:</label>
+              <input
+                class="form-control mb-3"
+                type="text"
+                id="street"
+                formControlName="street"
+                placeholder="Enter Street"
+              />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="street1" class="p-0 mb-1">Enter Street2:</label>
+              <input
+                class="form-control mb-3"
+                type="text"
+                id="street1"
+                formControlName="addressLine2"
+                placeholder="Enter Street"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="city" class="p-0 mb-1">Enter City:</label>
+              <input
+                class="form-control mb-3"
+                type="text"
+                id="city"
+                formControlName="city"
+                placeholder="Enter city"
+              />
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="state" class="p-0 mb-1">Enter State:</label>
+              <input
+                class="form-control mb-3"
+                type="text"
+                id="state"
+                formControlName="state"
+                placeholder="Enter state"
+              />
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="pin" class="p-0 mb-1">Enter Pin:</label>
+              <input
+                class="form-control mb-3"
+                type="text"
+                id="pin"
+                formControlName="pin"
+                placeholder="Enter Pin"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group mt-2">
+            <button class="btn btn-primary form-control"[disabled]="!reactiveForm.valid">Update</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  

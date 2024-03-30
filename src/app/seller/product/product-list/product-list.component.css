@@ -1,0 +1,32 @@
+img{
+    height: 250px;
+    padding: 10px;
+    max-width: 220px;
+    margin: auto;
+}
+@media screen and (max-width:600px) {
+    .card{
+        max-width: fit-content;
+        margin: auto;
+    }
+}
+.card1{
+    width: 400px;
+}
+input.ng-invalid.ng-touched{
+    border:2px solid red;
+}
+.loading{
+    position:absolute;
+    border-width: 10px;
+    top:10%;
+    left: 50%;
+    width: 60px;
+    height: 60px;
+}
+a{
+    cursor: pointer;
+}
+.find-button{
+    width: 150px;
+}

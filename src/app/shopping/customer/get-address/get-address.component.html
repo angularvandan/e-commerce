@@ -1,0 +1,82 @@
+<div class="container mt-5 mx-auto"*ngFor="let address of allAddress;let i=index">
+    <div class="card mx-auto p-4">
+      <h4 class="text-center mb-5">Address Details</h4>
+        <div class="row">
+          <label><h5>Address: {{i+1}}</h5></label>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="street" class="p-0 mb-1">Enter Street1:</label>
+              <input
+                class="form-control mb-3"
+                type="text"
+                id="street"
+                value="{{address?.street}}"
+                placeholder="Enter Street"
+                disabled
+              />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="street1" class="p-0 mb-1">Enter Street2:</label>
+              <input
+                class="form-control mb-3"
+                type="text"
+                id="street1"
+                value="{{address?.addressLine2}}"
+                placeholder="Enter Street"
+                disabled
+              />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="city" class="p-0 mb-1">Enter City:</label>
+              <input
+                class="form-control mb-3"
+                type="text"
+                id="city"
+                value="{{address?.city}}"
+                placeholder="Enter city"
+                disabled
+              />
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="state" class="p-0 mb-1">Enter State:</label>
+              <input
+                class="form-control mb-3"
+                type="text"
+                id="state"
+                value="{{address?.state}}"
+                placeholder="Enter state"
+                disabled
+              />
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="pin" class="p-0 mb-1">Enter Pin:</label>
+              <input
+                class="form-control mb-3"
+                type="text"
+                id="pin"
+                value="{{address?.pin}}"
+                placeholder="Enter Pin"
+                disabled
+              />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group mt-2">
+            <button class="btn btn-primary me-2"(click)="onUpdateAddress(address?._id)">Update Address</button>
+            <button class="btn btn-primary"(click)="onDeleteAddress(address?._id)">Delete Address</button>
+          </div>
+        </div>
+    </div>
+  </div>
+  
